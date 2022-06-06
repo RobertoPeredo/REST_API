@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>2. Definición del REST-API (Swagger) - REST-API</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Definici\u00f3n o Modelado del REST API utilizando Swagger", url: "#_top", children: [
+              {title: "Definici\u00f3n de nuestro REST API", url: "#definicion-de-nuestro-rest-api" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../desarrollo/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../desarrollo/" class="btn btn-xs btn-link">
+        3. Desarrollo del REST-API con Node.js
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../introduccion/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../introduccion/" class="btn btn-xs btn-link">
+        1. Introducción
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="definicion-o-modelado-del-rest-api-utilizando-swagger">Definición o Modelado del REST API utilizando Swagger</h1>
+<p>Para realizar el modelado de la definición de nuestra API vamos a utilizar <strong>Swagger</strong>, que es un lenguaje de modelado o descripción de REST API. Swagger sigue los lineamientos de OpenAPI Specification (OAS).</p>
+<p>La especificación OpenAPI Specification (OAS) establece una interfaz para describir una API de una manera que permita a cualquier desarrollador o aplicación descubrirla y comprender completamente sus parámetros y funcionalidades, entre ellos puntos finales disponibles (end-points), operaciones permitidas en cada end point, parámetros de operación, métodos de autenticación y otra información. </p>
+<p>Para más información acerca de lineamientos de OpenAPI Specification te recomiendo visitar este enlace --&gt; <a href="https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.1.0.md">LINK</a></p>
+<h2 id="definicion-de-nuestro-rest-api">Definición de nuestro REST API</h2>
+<ol>
+<li>Acceder a la página de Swagger <a href="https://swagger.io/">https://swagger.io/</a></li>
+<li>Una vez en la página hacer clic en el botón "Sign In" ubicado en la parte superior derecha<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171200302-584e70fe-01a7-4cbc-804e-678f85f9cc94.png" /><br><br></li>
+<li>A continuación nos aparecerá una pantalla para hacer Log In, hay distintas formas de loguearnos, yo recomiendo hacerlo con nuestra cuenta de GitHub<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171201174-de4ddd4c-c3ca-4c14-8c9d-563ddff66bcd.png" /><br><br></li>
+<li>Llenamos los campos con el usuario de nuestra cuenta de GitHub y damos clic en "Sign in"<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171201534-9cc87445-2a5d-4baf-8032-18ae909cf350.png" /><br><br></li>
+<li>Una vez logueados correctamente nos aparecerá la siguiente pantalla, nosotros vamos a hacer clic en el botón "CREATE API" ubicado en la parte inferior de la pantalla<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171203282-e4e7d8af-ffdf-425b-8cd2-fcac3185620b.png" /><br><br></li>
+<li>Nos aparecerá la siguiente ventana, la cual llenaremos de la siguiente forma. Noten que <strong>personas-api</strong> es el nombre que decidimos para ponerle a nuestro proyecto, ustedes pueden remplazarlo por el nombre de su proyecto, y el apartado <strong>Owner</strong>a, parece de acuerdo con el perfil de GitHub con el que hayan hecho Log In. Una vez llenados todos los campos, vamos a hacer clic sobre "Create API"<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171204397-8886cdf4-b358-4154-a181-a49f850931d4.png" /><br><br></li>
+<li>Nos aparecerá una ventana como la siguiente. Swagger nos ayuda dándonos un ejemplo de cómo comenzar y cómo modelar nuestro REST API. Si quieres saber más acerca de este proceso, te invito a revisar el ejemplo que nos da Swagger, para que te familiarices con la estructura, la sintaxis y los elementos con los que trabaja Swagger para el modelado de un REST API.<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171205641-b5d9ac5d-79ae-47dc-88fd-7aadb48599f8.png" /><br><br></li>
+<li>Nosotros borraremos el ejemplo que viene de forma determinada, e iremos escribiendo nuestra definición paso a paso. <br><br></li>
+<li>Comenzamos introduciendo los datos generales de nuestra API, tales como descripción, baseURL, versión, tipo de contenido que producirá nuestra API,etc:</li>
+</ol>
+<pre><code class="language-yml">    openapi: 3.0.0
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: Personas-API
+    url: https://virtserver.swaggerhub.com/RobertoPeredo/personas-api/1.0.0
+
+info:
+  description: Esta es la definición de un REST API que sirve para los datos de un conjunto de datos de personas
+  version: &quot;1.0.0&quot;
+  title: Personas-API
+  contact:
+    email: robertopgzm@gmail.com
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html' 
+
+</code></pre>
+<p>10.Después de esto, definimos los componentes, que son: nuestro modelo de Persona, que son prácticamente todos los datos que puede tener una persona en nuestro proyecto. También definimos el formato de los mensajes de error que devolverán nuestros servicios. Los definimos de esta forma, para que después los podamos referenciar y no tengamos que estar repitiendo código.</p>
+<pre><code class="language-yml">components:
+  schemas:
+    Persona:
+      type: object
+      required:
+        - Nombre
+        - Apellido
+        - Edad
+        - Mail
+        - Celular
+      properties:
+        Nombre:
+          type: string
+          example: Roberto
+        Apellido:
+          type: string
+          example: Peredo
+        Edad:
+          type: integer
+          example: 25
+        Mail:
+          type: string
+          example: roberto@correo.com
+        Celular:
+          type: integer
+          example: 2222222222
+    PersonaId:
+      type: object
+      required:
+        - id
+        - Nombre
+        - Apellido
+        - Edad
+        - Mail
+        - Celular
+      properties:
+        id:
+          type: integer
+          example: 3
+        Nombre:
+          type: string
+          example: Roberto
+        Apellido:
+          type: string
+          example: Peredo
+        Edad:
+          type: integer
+          example: 25
+        Mail:
+          type: string
+          example: roberto@correo.com
+        Celular:
+          type: integer
+          example: 2222222222
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          example: 404
+        message:
+          type: string
+          example: NotFound
+
+</code></pre>
+<p>11.Finalmente definimos los endpoints y métodos http que nuestro API tendrá:</p>
+<pre><code class="language-yml">paths:
+  /personas:
+
+##################### GET #################
+    get:
+      tags:
+        - END-POINTS
+      summary: Obtener los datos de todas las personas
+      description: Al hacer la consulta GET en el path &quot;/personas&quot;, recibimos como respuesta un arreglo con todos las personas y sus respectivos datos
+      responses:
+        '200':
+          description: Consulta correcta
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PersonaId'
+        default:
+            description: Error inesperado
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+
+##################### POST #################
+    post:
+      tags:
+        - END-POINTS
+      summary: Añadir el registro de una persona
+      description: Al hacer la consulta POST en el path &quot;/personas&quot;,mandamos los datos necesarios para modificar a una persona en nuestra lista de peronas
+      requestBody:
+        description: Datos de la persona a agregar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Persona'
+
+      responses:
+        '201':
+          description: Registro creado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonaId'
+        default:
+            description: Error inesperado
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+
+  /personas/{id}:
+
+##################### GET #################
+    get:
+      tags:
+        - END-POINTS
+      summary: Obtener los datos una persona de acuerdo a su Id
+      description: Al hacer la consulta GET en el path &quot;/personas/{id}&quot;, se hace la consulta de una persona de acuerdo a su id y  recibimos como respuesta un arreglo con los datos de esta persona
+      parameters: 
+         - name: id
+           in: path
+           description: Id de la persona la cual se va a consultar
+           required: true
+           schema:
+             type: integer
+      responses:
+        '200':
+          description: Consulta correcta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonaId'
+        default:
+            description: Error inesperado
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+    ##################### DELETE #################
+    delete:
+      tags:
+        - END-POINTS
+      summary: Eliminar persona de acuerdo a  su Id
+      description: Al hacer la consulta DELETE en el path &quot;/personas/{id}&quot;, se hace la consulta de una persona de acuerdo a su id y  se elimina de la lista de personas
+      parameters: 
+         - name: id
+           in: path
+           description: Id de la persona a eliminar
+           required: true
+           schema:
+             type: integer
+      responses:
+        '204':
+          description: Registro eliminado
+          content: 
+            application/json:
+              schema:
+                type: integer
+                example: 3
+        default:
+            description: Error inesperado
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+
+      ##################### PUT #################
+    put:
+      tags:
+        - END-POINTS
+      summary: Modifica el registro de una persona de acuerdo a  su Id
+      description: Al hacer la consulta PUT en el path &quot;/personas/{id}&quot;, se hace la consulta de una persona de acuerdo a su id y  se modifica el registro de la misma
+      requestBody:
+        description: Datos de la persona a agregar
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Persona'
+      parameters: 
+         - name: id
+           in: path
+           description: Id de la persona a modificar.
+           required: true
+           schema:
+             type: integer
+
+
+      responses:
+        '204':
+          description: Registro actualizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonaId'
+        default:
+            description: Error inesperado
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+
+</code></pre>
+<p>12.La definición de nuestra API está terminada, a continuación, le comparto el LINK de nuestra API en Swagger, por si se realiza alguna modificación en el futuro, para que puedan interactuar con nuestra API y para que tengan acceso al código completo:</p>
+<p><a href="https://app.swaggerhub.com/apis/RobertoPeredo/personas-api/1.0.0">PERSONAS-API</a></p>
+<p>También les dejo la documentación que nos genera Swagger, para que observen cómo es que va a estar funcionando nuestro REST API</p>
+<p><a href="https://app.swaggerhub.com/apis-docs/RobertoPeredo/personas-api/1.0.0">DOCUMENTACIÓN</a></p>
+<p>Pueden descargar el API en formato tipo JSON y comenzar a hacer pruebas del funcionamiento en algún servicio como POSTMAN, nosotros lo estaremos utilizando en la siguiente parte del tutorial, la cual consiste en que una vez tengamos definida nuestra API la vamos a implementar en Node.Js</p>
+<p>¡Esto es todo! Ya tenemos nuestra API definida, prototipada y lista para ser utilizada y desarrollada.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../desarrollo/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../desarrollo/" class="btn btn-xs btn-link">
+        3. Desarrollo del REST-API con Node.js
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../introduccion/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../introduccion/" class="btn btn-xs btn-link">
+        1. Introducción
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>4. Implementación de un API en un App Services de Azure - REST-API</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Implementaci\u00f3n de un API en un App Services de Azure", url: "#_top", children: [
+              {title: "Subir nuestro proyecto a un repositorio de GitHub", url: "#subir-nuestro-proyecto-a-un-repositorio-de-github" },
+              {title: "Subiendo nuestra API en Azure", url: "#subiendo-nuestra-api-en-azure" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../database/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../database/" class="btn btn-xs btn-link">
+        5. Creación de una base de datos en Azure, modificación del API para trabar con DB y vinculación con el API
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../desarrollo/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../desarrollo/" class="btn btn-xs btn-link">
+        3. Desarrollo del REST-API con Node.js
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="implementacion-de-un-api-en-un-app-services-de-azure">Implementación de un API en un App Services de Azure</h1>
+<h2 id="subir-nuestro-proyecto-a-un-repositorio-de-github">Subir nuestro proyecto a un repositorio de GitHub</h2>
+<h3 id="creando-un-nuevo-repositorio">Creando un nuevo repositorio</h3>
+<ol>
+<li>Lo primero que tenemos que hacer es crear un repositorio nuevo en GitHub. Para esto vamos a ir a la página de GitHub y damos clic en el botón "+" que aparece en la parte superior derecha, y vamos a seleccionar " New repository".<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171529266-132065c6-154f-483c-b1ab-564e4e91d844.png" /><br><br></li>
+<li>Vamos a colocar un nombre y una descripción a nuestro repositorio, en esta ocasión, yo nombré mi repositorio como "PersonasAPILocal, posteriormente vamos llenar los demás datos y haremos clic en "Create repository"<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171529489-ee081386-0961-40b3-b088-43298a4a4393.png" /><br><br></li>
+</ol>
+<h3 id="subiendo-nuestro-repositorio-a-github">Subiendo nuestro repositorio a GitHub</h3>
+<ol>
+<li>Nos aparecerá un código como el siguiente, el cual vamos a copiar.</li>
+</ol>
+<p><img alt="image" src="https://user-images.githubusercontent.com/99369122/171529813-ac620540-c518-4bd8-a189-d7641f1e0448.png" />
+2. Vamos a abrir en Visual Studio la carpeta de nuestro proyecto, y vamos a pegar en la terminal el código que copiamos. Para esto, ya debes tener vinculado tu VScode con tu cuenta de GitHub</p>
+<p><img alt="image" src="https://user-images.githubusercontent.com/99369122/171530206-53264d2f-6852-4ac2-a69a-2b9fbcf91043.png" />
+3. Vamos a presionar "enter", vamos a agregar un comentario para el commit y automáticamente se comenzarán a subir todos los archivos de nuestro proyecto a nuestro repositorio de GitHub. Presionamos en Sync Changes, y listo. Ahora sí, tenemos nuestro Repositorio listo con todos los archivos.
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171530585-217b6f64-52c4-4315-a285-f18cc0388a7e.png" /></p>
+<h3 id="link-del-repositorio">Link del repositorio</h3>
+<p>Aquí te dejo el link del repositorio, para que simplemente lo descargues y hagas uso de el 
+<a href="https://github.com/RobertoPeredo/PersonasAPILocal">PersonasAPILocal</a></p>
+<h2 id="subiendo-nuestra-api-en-azure">Subiendo nuestra API en Azure</h2>
+<p>Lo primero que tenemos que hacer es tener una cuenta en <a href="https://portal.azure.com">portal.azure.com</a>. Yo, por ejemplo, creé mi cuenta con mi correo estudiantil, el cual me otorga $100 dólares para poder ocupar en los servicios de Azure.</p>
+<p>Una vez con nuestra cuenta logueada, procedemos a dar clic en "crear un recurso"
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171550598-dea30113-ce68-4bcb-84a3-05643b1710b5.png" />
+Posteriormente elegimos la opción “crear" en Aplicación Web
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171550721-ecbc8696-6d09-420b-9543-e4423ca80a83.png" />
+Ahora vamos a ir llenando poco a poco los datos que se nos solicita.</p>
+<h4 id="detalles-del-proyecto">Detalles del proyecto</h4>
+<p>En <em>Suscripción</em>, dejaré la que viene de forma predeterminada qué es "Azure for Students", como les comenté esta suscripción viene con mi cuenta creada a partir del correo de estudiante. En el apartado de <em>Grupo de recursos</em> voy a hacer clic en donde dice "Crear nuevo"
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171552423-4347422d-31c1-449e-82af-5c643f2896f3.png" />
+<br><br>Le pondré por nombre *<em>"DemoWeb"</em> y haré clic en aceptar.<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171552544-0d76bfe9-414b-42c3-82e1-8e402ecf2ebf.png" /></p>
+<h4 id="detalles-de-instancia">Detalles de instancia</h4>
+<p>En el apartado de <em>Nombre</em>, colocaré el nombre de nuestro proyecto hasta ahora, el cual es "PersonasAPILocal". Los demás datos deben ser preferentemente llenados como se muestran en la imagen. Es importante que en el aparto <em>Publicar</em> seleccionemos la opción <strong>"Código"</strong>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171552878-b58f46b5-dfdc-4e29-bbbc-0d80c7056624.png" /></p>
+<h4 id="plan-de-app-service">Plan de App Service</h4>
+<p>En el apartado de <em>Plan de Linux</em> lo voy a dejar por defecto, pero en <em>SKU y tamaño</em> voy a hacer clic en "Cambiar tamaño"
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171553310-3cde044d-42fc-461a-8839-44e38158ebf9.png" /><br><br>
+Y en el menú del lado derecho, voy a seleccionar el "plan de tarifa gratuito" y a dar clic en "Aceptar"<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171553441-ecc600f3-996c-428a-94c7-dc3109038e5a.png" />
+Por último, simplemente voy a dar clic en "Revisar y crear"
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171553598-2634838a-f26e-49d0-b437-f2f788313747.png" />
+Nos aparecerá esta pantalla y haremos clic en "Crear
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171553780-1f50398f-c0ef-4557-8eeb-0493efa02908.png" /></p>
+<h4 id="implementacion">Implementación</h4>
+<p>Nos aparecerá una pantalla como esta, y debemos dejar que se termine de realizar la implementación
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171553938-3e8a1097-192e-4c51-99e2-824fdd4a55ff.png" />
+Una vez terminada la implementación, nos aparecerá la siguiente pantalla y a continuación daremos clic en "Ir al recurso"
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171554124-15bcf015-abf0-4891-bee9-96bc70a62e1e.png" />
+<br><br>Iremos a la barra lateral izquierda y buscaremos la opción de <strong>" Centro de implementación"</strong> y haremos clic sobre ésta.<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171554956-0d1e4687-d7c9-45e4-9ba2-097c7e987e01.png" /></p>
+<h3 id="centro-de-implementacion">Centro de implementación</h3>
+<h4 id="origen">Origen</h4>
+<p>Nos aparecerá la siguiente ventana, y seleccionaremos GitHub como Origen de nuestro proyecto
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171555151-0c42968b-4bd2-4654-b3bd-d74d44061d55.png" /></p>
+<h4 id="github">Github</h4>
+<p>Debemos loguearnos con nuestro perfil de GitHub y seleccionar la organización, repositorio y rama de nuestro proyecto. 
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171555406-ebcde95b-2689-4543-9255-06981b3edc87.png" /></p>
+<p>Y finalmente, en la parte superior, debemos hacer clic en "Guardar"
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171555483-5f766418-e34b-41f5-8f9e-18e24f6f6e8d.png" /></p>
+<h4 id="actions-en-github">Actions en Github.</h4>
+<p>Una vez hecho clic en "Guardar", automáticamente en nuestro repositorio de GitHub comienza a ejecutarse un Action de parte de Azure, en cuanto termine de construirse y desplegarse, tendremos acceso a nuestra API 
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171555717-f6a6813d-ba09-42d6-9ac9-1f44ab12b753.png" /></p>
+<p>Una vez terminada el Action por parte de GitHub veremos algo así<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171981482-260a1969-c90c-475b-adbf-5664b1ebc26e.png" /></p>
+<h4 id="url-de-nuestro-rest-api">URL de nuestro REST-API</h4>
+<p>Regresamos a Azure y hacemos clic en "Introducción"<br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171555933-447979ef-f361-443a-b1df-02b697d81f77.png" /></p>
+<p>¡¡¡¡¡¡Y con este link, tendremos acceso a nuestra API corriendo en AZURE!!!!!!
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171556249-3820655c-b333-4113-bb76-eb29e9ce05c3.png" /></p>
+<p>¡¡¡Este es el LINK!!! ---&gt;&gt;&gt;&gt; <a href="https://personasapilocal1.azurewebsites.net">https://personasapilocal1.azurewebsites.net</a></p>
+<p>Se los comparto, para que ustedes mismos realicen pruebas del RESTA API funcionando.</p>
+<p>Probaremos nuestra API nuevamente con la plataforma de POSTMAN. Les dejó aquí el archivo para que tú mismo puedas realizar las pruebas. Basta con descargar el archivo e importarlo en POSTMAN. ¡No olvides hacer las solicitudes con base a la definición de nuestra API! Te dejo <a href="https://app.swaggerhub.com/apis-docs/RobertoPeredo/personas-api/1.0.0">AQUI</a> la definición de nuestro REST API para que tú mismo o puedas realizar las pruebas.</p>
+<p><a href="https://github.com/RobertoPeredo/REST_API/tree/main/POSTMAN/AZURE">ARCHIVO PARA PRUEBAS EN POSTMAN</a>
+<br><br>En esta ocasión solo realizaremos la prueba de un END-POINT para que observen que todo trabaja a la perfección</p>
+<p>El resto de las pruebas las omito, porque es las mismas que ya realizamos en la parte anterior del tutorial, te dejo <a href="https://robertoperedo.github.io/REST_API/desarrollo/#pruebas-de-funcionamiento-de-los-endpoint-utilizando-postman">AQUÍ</a> la liga de las pruebas por si quieres revisar cómo se hacen.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../database/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../database/" class="btn btn-xs btn-link">
+        5. Creación de una base de datos en Azure, modificación del API para trabar con DB y vinculación con el API
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../desarrollo/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../desarrollo/" class="btn btn-xs btn-link">
+        3. Desarrollo del REST-API con Node.js
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+</footer>
+
+</body>
+</html>

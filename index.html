@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="None">
+    
+    
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>REST-API</title>
+    <link href="./css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="./css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="./css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/bootstrap-3.3.7.min.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    
+      <script src="./js/elasticlunr.min.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '.';
+      var is_top_frame = (window === window.parent);
+        
+        var pageToc = [
+          {title: "REST-API", url: "#_top", children: [
+          ]},
+        ];
+
+    </script>
+    <script src="./js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+<nav class="navbar wm-page-top-frame">
+  <div class="container-fluid wm-top-container">
+    
+    <div class="wm-top-tool pull-right wm-vcenter">
+      <form class="dropdown wm-vcentered" id="wm-search-form" action="./search.html">
+        
+        <button id="wm-search-show" class="btn btn-sm btn-default" type="submit"
+          ><i class="fa fa-search" aria-hidden="true"></i></button>
+
+        <div class="input-group input-group-sm wm-top-search">
+          <input type="text" name="q" class="form-control" id="mkdocs-search-query" placeholder="Search" autocomplete="off">
+          <span class="input-group-btn" role="search">
+            
+            <button class="btn btn-default dropdown-toggle collapse" data-toggle="dropdown" type="button"><span class="caret"></span></button>
+            <ul id="mkdocs-search-results" class="dropdown-menu dropdown-menu-right"></ul>
+            <button id="wm-search-go" class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
+    </div>
+
+    
+    <div class="wm-top-tool wm-vcenter pull-right wm-small-left">
+      <button id="wm-toc-button" type="button" class="btn btn-sm btn-default wm-vcentered"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+    </div>
+
+    
+    
+
+    
+    <a href="" class="wm-top-brand wm-top-link wm-vcenter">
+      
+      <div class="wm-top-title">
+        REST-API<br>
+        
+      </div>
+    </a>
+  </div>
+</nav>
+
+  <div id="main-content" class="wm-page-top-frame">
+    
+<nav class="wm-toc-pane">
+  
+  <ul class="wm-toctree">
+        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">Inicio</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="introduccion/" class="wm-article-link wm-toc-text">1. Introducción</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="definicion/" class="wm-article-link wm-toc-text">2. Definición del REST-API (Swagger)</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="desarrollo/" class="wm-article-link wm-toc-text">3. Desarrollo del REST-API con Node.js</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="implementacion/" class="wm-article-link wm-toc-text">4. Implementación de un API en un App Services de Azure</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="database/" class="wm-article-link wm-toc-text">5. Creación de una base de datos en Azure, modificación del API para trabar con DB y vinculación con el API</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="apiKey/" class="wm-article-link wm-toc-text">6. Asignación API-KEY</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="consumo/" class="wm-article-link wm-toc-text">7. Consumo del API (Front-end)</a>
+</li>
+  </ul>
+</nav>
+
+    <div class="wm-content-pane">
+      <iframe class="wm-article" name="article"></iframe>
+    </div>
+  </div>
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="introduccion/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="introduccion/" class="btn btn-xs btn-link">
+        1. Introducción
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="rest-api">REST-API</h1>
+<p>Documentación acerca de la creación  e implementación paso a paso de un REST API, utilizando las tecnologías de Swagger, Node.js, express, SQL y Azure. </p>
+<p>A continuación, daremos una pequeña introducción acerca de qué es un REST-API, así como también describiremos todos las tecnologías que vamos a estar utilizando a lo largo del tutorial</p>
+<div align="end"style="display: inline_block"><br>
+    <img align="center" alt="SWAGGER" height="100" width="100"  src="https://user-images.githubusercontent.com/99369122/172023668-f18aa64d-c68f-447f-809a-f85c37b8ca5b.png"/>
+    <img align="center" alt="NODE" height="100" width="100" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />            
+    <img align="center" alt="EXPRESS" height="100" width="100"  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg" />
+    <img align="center" alt="MYSQL" height="100" width="100"  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg" />
+     <img align="center" alt="AZURE" height="100" width="100"  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original-wordmark.svg" />     
+</div>
+
+<div align="center"><br>
+    <a href="https://github.com/RobertoPeredo"  align="center"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"></a>
+    <a href="mailto:robertopgzm@gmail.com" ><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"></a>
+</div>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="introduccion/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="introduccion/" class="btn btn-xs btn-link">
+        1. Introducción
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+</footer>
+
+</body>
+</html>
+<!--
+MkDocs version : 1.3.0
+Build Date UTC : 2022-06-06 01:54:25.960541+00:00
+-->

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    
+    
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>3. Desarrollo del REST-API con Node.js - REST-API</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Desarrollo de la definici\u00f3n del API en Node.js (Utilizando base de datos local)", url: "#_top", children: [
+              {title: "Prerrequisitos", url: "#prerrequisitos" },
+              {title: "Inicio del proyecto", url: "#inicio-del-proyecto" },
+              {title: "Montaje del servidor local", url: "#montaje-del-servidor-local" },
+              {title: "Programaci\u00f3n REST API", url: "#programacion-rest-api" },
+              {title: "Pruebas de funcionamiento de los ENDPOINT utilizando POSTMAN", url: "#pruebas-de-funcionamiento-de-los-endpoint-utilizando-postman" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../implementacion/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../implementacion/" class="btn btn-xs btn-link">
+        4. Implementación de un API en un App Services de Azure
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../definicion/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../definicion/" class="btn btn-xs btn-link">
+        2. Definición del REST-API (Swagger)
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="desarrollo-de-la-definicion-del-api-en-nodejs-utilizando-base-de-datos-local">Desarrollo de la definición del API en Node.js (Utilizando base de datos local)</h1>
+<p>Una vez teniendo la definición de nuestra API, conocemos ahora los end-points con los que deber de contar nuestro REST API, los tipos de datos que debemos enviarle y los tipos de respuesta que esperamos.</p>
+<h2 id="prerrequisitos">Prerrequisitos</h2>
+<p>Para continuar con la siguiente parte de nuestro tutorial, necesitamos tener instalado lo siguiente, el enlace de cada programa te lleva directamente a la página oficial de cada uno para que puedas descargarlos, todos de forma gratuita. </p>
+<ul>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a>  </li>
+<li><a href="https://nodejs.org/es/">NODE</a></li>
+<li><a href="https://www.postman.com/">POSTMAN</a></li>
+</ul>
+<h2 id="inicio-del-proyecto">Inicio del proyecto</h2>
+<p>1.- Crear una carpeta vacía, en el directo de nuestra preferencia con el nombre de nuestro proyecto. En esta ocasión a la carpeta le puse por nombre PersonasAPILocal, haciendo referencia a que este proyecto se trabajará con una "base de datos" local, como bien lo dice en el título del proyecto, y lo pongo entre comillas porque en realidad vamos a guardar en un array varios objetos con los datos de algunas personas, posteriormente en la <a href="../implementacion/">parte 4</a> de este tutorial, lo vamos a vincular con una base de datos en la nube de Azure.<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171228427-5e8b944d-7873-4df3-bcde-f64591f29da8.png" /><br><br></p>
+<p>2.- Abrimos Visual Studio y arrastramos la carpeta que creamos hacia la parte izquierda de nuestro Visual Studio, quedando de la siguiente manera:<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171228969-e60417ab-89e5-4885-8795-ff5d4f728222.png" /><br><br></p>
+<p>3.- Vamos a crear un proyecto de <strong>NODE</strong>, para esto, vamos a abrir una nueva terminal en la carpeta de nuestro proyecto. Como ya tenemos abierta en VScode nuestra carpeta del proyecto, entonces simplemente vamos a ir al menú ubicado en la parte de arriba de VScode y vamos a hacer clic en "Terminal" y posteriormente en "New Terminal"<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171229708-cf4bc41c-aa72-4d34-a4a2-93c5b0db4d53.png" /><br><br></p>
+<p>4.- Una vez abierta la terminal, vamos a escribir el comando<br><br><code>npm init</code><br><br>Este comando es el que nos permite arrancar un nuevo proyecto de Node. Escribimos el comando y posteriormente presionamos la tecla "ENTER"<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171231074-f0fc7cd9-b8da-42d0-a3f8-7160d4d7ea3e.png" /><br><br></p>
+<p>5.- Después de presionar enter nos aparecerá un "Menú" como el que se muestra a continuación, lo cual nos pide algunos datos acerca de nuestro proyecto como son:  </p>
+<ul>
+ <li>Name: (Dejaremos el nombre de la carpeta)</li>
+ <li>Version: Versión del proyecto</li>
+ <li>Description: Podemos agregar una descripción de nuestro proyecto.  </li>
+</ul>
+<p>Y algunos más, nosotros lo llenaremos de la siguiente manera. <br><br>
+ <img alt="image" src="https://user-images.githubusercontent.com/99369122/171232716-a353f795-032e-4d4d-94d8-c68458d93a7c.png" /> <br><br>
+ 6.- Presionamos "ENTER" y nos aparecerá un JSON con los datos introducidos, verificamos los datos y presionamos nuevamente "ENTER"<br><br>
+ <img alt="image" src="https://user-images.githubusercontent.com/99369122/171233054-6865a649-71db-4717-826c-569c91487db9.png" /><br><br>
+ 7.- Una vez presionado "ENTER", en nuestra carpeta del proyecto se genera automáticamente un archivo llamado "package.json"<br><br>
+  <img alt="image" src="https://user-images.githubusercontent.com/99369122/171233376-12744941-593a-4110-a819-3e168ded835f.png" /><br><br>
+ 8.- Como vamos a desarrollar nuestra API con ayuda de <strong>express</strong>, tenemos ahora que instalar esta dependencia. Para hacer esto, nuevamente vamos a escribir en nuestra terminal el comando:<br><br>
+ <code>npm install express --save</code>
+ <br><br>Ponemos el comando <em>--save</em>, porque es una dependencia de nuestro proyecto, no es una dependencia de desarrollo sino que es una dependencia de producción, es decir, para que nuestro proyecto funcione, necesita de express.<br><br> 
+ Si se instaló de forma correcto, veremos un mensaje en el terminal parecido a este. <br><br>
+ <img alt="image" src="https://user-images.githubusercontent.com/99369122/171234930-63f8e6d0-ab96-4a1b-9925-35e763ec5acf.png" /><br><br>
+ También, se creó un archivo llamado "package-lock.json" dentro de la carpeta de nuestro proyecto.<br><br>
+ <img alt="image" src="https://user-images.githubusercontent.com/99369122/171235495-b8749d09-d1bb-43b2-8c6a-73afbfbf8743.png" /><br><br></p>
+<p>9.- Vamos a instalar ahora <strong>Nodemon</strong>, el cual es una aplicación que nos ayudará a recargar nuestro servidor en cuanto detecte algún cambio, esta aplicación es de mucha utilidad ya que nos ahorra tiempo por estar deteniendo y ejecutando nuevamente nuestro servidor<br><br>
+ <code>npm i -D nodemon</code>
+ <br><br></p>
+<p>10.- Instalamos ahora <strong>Body-paser</strong> con el siguiente comando: <br><br>
+   <code>npm i body-parser</code>
+  <br><br>Usualmente el cuerpo de una petición (payload), contiene información desde una petición tipo POST o PUT. Los desarrolladores quienes implementamos servidores, requerimos frecuentemente acceso a la información del cuerpo de dicha petición.</p>
+<p>El módulo npm body-parser permite realizar esta tarea. No es necesario programarla. Solo se requiere instalar body-parser y habilitar json() así como url-encode como middlewares para convertir datos a JSON.</p>
+<p>11.- Instalamos ahora <strong>express-validator</strong> con el siguiente comando: <br><br>
+   <code>npm install --save express-validator</code>
+ <br><br>Esta dependencia, nos ayudará al momento de hacer las validaciones en los end-points<br><br>
+12.- Vamos a instalar <strong>CORS</strong> el cual nos servirá para poder consumir nuestra API posteriormente desde nuestro Front-end en un navegador. Si no instalamos esta dependencia, si accedemos a la url de nuestro api por ejemplo <a href="https://personasapilocal1.azurewebsites.net/personas">https://personasapilocal1.azurewebsites.net/personas</a>, el navegador SÍ me va mostrar los resultados, pero al momento de hacer un fetch()  dentro de  alguna función que invoque por ejemplo un botón, nos aparecerá el error de CORS es por eso que vamos a instalar de una vez la dependencia<br><br></p>
+<p><code>npm i cors --save</code></p>
+<p><br><br>
+13.- Por último vamos a crear nuestro archivo de <strong>"index.js"</strong> dentro de la carpeta de nuestro proyecto. Para esto vamos a hacer clic derecho sobre la carpeta de nuestro proyecto y vamos a dar clic en " New File" y le pondremos por nombre <em>index.js</em><br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171236180-98155f54-9617-4ecd-92a4-dcb2ba783cf7.png" /><br><br></p>
+<h2 id="montaje-del-servidor-local">Montaje del servidor local</h2>
+<p>1.- Lo primero que haremos es montar un pequeño servidor en nuestra computadora, para poder estar ejecutando nuestro REST-API, para esto vamos a poner el siguiente código en nuestro archivo de <em>index.js</em></p>
+<pre><code class="language-js">const express = require('express'); // Utilizo el módulo de node de express
+const path = require('path'); // Utilizo el módulo de node de path
+const bodyParser = require('body-parser') // Utilizo el modulo de body parser
+const app = express(); // Genero mi aplicación de express simplemente llamando al constructor express()
+
+
+const port = process.env.port || 8080; // constante para nuestro puerto, es un OR para el caso de  desarrollo en algún servicio o desarrollo local 
+app.listen(port, () =&gt;console.log(`Escuchando en el puerto ${port}`))
+
+</code></pre>
+<p><br><br>
+2.- Dentro de nuestro archivo de  <em>package.json</em>. Vamos a localizar la línea donde diga "script".<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171258320-f75f8848-3aa9-4bb0-bb08-0b70d013c5f1.png" /><br><br>
+ Y dentro en  "serve" vamos a modificar la parte de:<br><br>
+<code>"serve": "echo \"Error: no test specified\" &amp;&amp; exit 1"</code>
+<br> <br>
+Por: <br> <br>
+<code>"serve": "nodemon index.js"</code>
+<br><br>Esto nos va a servir para que nodemon reinicie el servidor cada que realicemos un cambio.</p>
+<p>3.- Escribimos ahora en la terminal, el comando<br> <br>
+<code>npm run serve</code>
+<br><br> Y ahora sí, si todo salió bien, tendríamos nuestro pequeño servidor local funcionando. En la consola debió aparecer un mensaje como este:<br> <br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171257860-eaab73cf-37bd-4d07-81d9-147d1b8baa43.png" /></p>
+<p>4.- Una vez teniendo nuestro servidor local funcionando, vamos a crear un primer END-POINT muy sencillo antes de pasar a crear los END POINTS de nuestra definición.
+Para ello vamos a agregar unas líneas a nuestro código anterior, quedando de la siguiente forma:<br><br></p>
+<pre><code class="language-js">const express = require('express'); // Utilizo el módulo de node de express
+const path = require('path'); // Utilizo el módulo de node de path
+const bodyParser = require('body-parser') // Utilizo el modulo de body parser
+const app = express(); // Genero mi aplicación de express simplemente llamando al constructor express()
+
+// *****Lineas añadidas***
+//Route
+app.get('/', (req, res)=&gt;{// Petición de tipo GET para nuestra API
+    res.send(&quot;Bienvenido a mi API&quot;);
+})
+//*************
+
+const port = process.env.port || 8080; // constante para nuestro puerto, es un OR para el caso de  desarrollo en algún servicio o desarrollo local 
+app.listen(port, () =&gt;console.log(`Escuchando en el puerto ${port}`))
+
+</code></pre>
+<p><br><br>Ahora sí, guardamos lo cambios y si todo estuvo bien. Podemos ir a nuestro navegador favorito y visitar <a href="http://localhost:8080/">http://localhost:8080/</a>, que fue el puerto en donde configuramos nuestro servidor. Que como ya sabemos, nuestro navegador por defecto siempre hace peticiones GET <br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171259737-7bf6e6b8-7b7b-484f-a3f0-245c28febf87.png" /><br><br>
+¡Felicidades! Ya tenemos nuestra primer API funcionando, aunque no sigue para nada la definición que ya tenemos, a continuación, voy a crear de forma correcta el API que se nos solicita:</p>
+<h2 id="programacion-rest-api">Programación REST API</h2>
+<p>1.- Lo primero que tenemos que hacer es crear dos carpetas dentro de la carpeta de nuestro proyecto, vamos a crear una carpeta llamada <strong>app</strong> y dentro de esta vamos a crear 4 carpetas, una de nombre <strong>controllers</strong> , otro de nombre <strong>routers</strong>, y otra de nombre <strong>validators</strong> y a su vez dentro de cada  una de estas carpetas, debemos crear un archivo de nombre <strong>personas.js</strong>. La cuarta carpeta tendrá por nombre <strong>herlpers</strong> y dentro, crearemos un archivo llamado <strong>validateHelper.js</strong>.
+Quedando de la siguiente manera:<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171909932-d6dcfd17-3c06-4ae2-82d4-d30bc47644db.png" /><br><br>
+Todo esto lo hacemos para tener un código desacoplado y por lo tanto sea más entendible y mantenible.</p>
+<p>2.- Dentro de la carpeta <strong>routers</strong> agregar  dentro del archivo <strong>personas.js</strong>, el siguiente código . El código agregado viene con sus respectivos comentarios para mejor entendimiento del mismo.<br><br></p>
+<pre><code class="language-js">/*HOJA DE RUTAS, en esta hoja vamos a tener el control de todas las rutas de nuestra app*/
+const { request } = require('express');
+const res = require('express/lib/response');
+const { links, json } = require('express/lib/response');
+// importo el modulo de express específicamente coon el constructor que tiene express de .Router()
+const endPoints = require('express').Router(); 
+//importo las funciones desde la ruta /controllers/personas.js
+const {obtenerPersonas, obtenerPersona,añadirPersona,actualizarPersona,eliminarPersona }= require('../controllers/personas')
+const {validarDatos}= require('../validators/personas')
+
+/* ENDPOINTS */
+/*Todas las funciones como por ejemplo obtenerPersonas, realizan toda su funcionalidad
+en la hoja ../controllers/personas') se hace de esta forma para tener mas control en nuestro código */
+
+
+//Obtener todos los datos de todas las personas de la lista
+endPoints.get('/',obtenerPersonas)
+
+//Obtener los datos una persona de acuerdo a su Id
+endPoints.get('/:id', obtenerPersona)
+
+/* Agregar una nueva persona al arreglo, pero antes de añadir valido los datos, con ayuda de ValidaDatos
+en este caso Validar datos es un Middleware que intercepta el mensaje, sino obtuvo ningún error deja a pasar
+ hacia añadirPersona con el next() que tiene internamente , si obtuvo alguno arroja el error*/
+endPoints.post('/', validarDatos,añadirPersona)
+
+/*Modificar los datos de una persona,pero antes de añadir valido los datos, con ayuda de ValidaDatos
+en este caso ValidarDatos es un Middleware que intercepta el mensaje, deja a pasar hacia añadirPersona
+con el next() que tiene internamente */
+endPoints.put('/:id',validarDatos, actualizarPersona)
+
+//Eliminar a una persona
+endPoints.delete('/:id', eliminarPersona )
+
+// Exporto todos mis endPoints para que los &quot;reconozca&quot; en index.html
+module.exports = endPoints;
+
+
+
+</code></pre>
+<p><br><br></p>
+<p>3.- Dentro de la carpeta <strong>controllers</strong>  agregar el siguiente código en el archivo <strong>personas.js</strong>. El código agregado viene con sus respectivos comentarios para mejor entendimiento del mismo.<br><br></p>
+<pre><code class="language-js">const { response } = require('express');
+const { request } = require('express');
+
+/* personas es el objeto en donde tenemos nuestra &quot;base de datos local&quot;
+Todos los cambios de post,put,delete, solo funcionan mientras el servidor está funcionando,
+en caso de reiniciar el servidor regresara a los valores actuales*/
+
+let personas = [
+    {
+        &quot;id&quot;: 1,
+        &quot;Nombre&quot;: &quot;Roberto&quot;,
+        &quot;Apellido&quot;: &quot;Peredo&quot;,
+        &quot;Edad&quot;: 25,
+        &quot;Mail&quot;: &quot;roberto@correo.com&quot;,
+        &quot;Celular&quot;: 2222222222
+      },
+      {
+        &quot;id&quot;: 2,
+        &quot;Nombre&quot;: &quot;Maite&quot;,
+        &quot;Apellido&quot;: &quot;Cruz&quot;,
+        &quot;Edad&quot;: 25,
+        &quot;Mail&quot;: &quot;maite@correo.com&quot;,
+        &quot;Celular&quot;: 5555555555
+      },
+      {
+        &quot;id&quot;: 3,
+        &quot;Nombre&quot;: &quot;Juan&quot;,
+        &quot;Apellido&quot;: &quot;Perez&quot;,
+        &quot;Edad&quot;: 25,
+        &quot;Mail&quot;: &quot;Juan@correo.com&quot;,
+        &quot;Celular&quot;: 6666666666
+      }
+];
+
+//Obtener todas las personas de la lista
+
+const obtenerPersonas = [(request, response)=&gt;{
+
+    //Validamos si el array está vacío
+    if(personas.length===0){
+        //En caso de estar vacío, mandamos el sig mensaje
+        response.status(415).json({error: &quot;No existe  ninguna persona registrada&quot;});
+     }
+    else {
+        //Sino está vació desplegamos la lista de todas las personas
+    response.json(personas)}
+
+}]
+
+
+
+//Obtener una  personas de la lista de acuerdo a su ID
+const obtenerPersona =[(request,response)=&gt;{
+    /*recupero el id de la persona haciendo un de-structur. La idea es crear una variable llamada id, 
+    que está contenida con el mismo nombre id dentro de parms*/
+    const {id} = request.params 
+
+    //Hago la validación para ver si algún objeto de mi arreglo personas tiene el id igual al requerido(devuelve un bool)
+    if(personas.some( persona =&gt; persona.id === parseInt(id) )){  
+
+        /*Si existe ese id en mi array, entonces: 
+        Encuentro el id que corresponda al  requerido y lo devuelvo en la response de mi api
+        Como mi variable id viene en string con parseInt convertimos a entero id, porque el id 
+        dentro del array personas es int*/        
+       response.json(personas.find( persona =&gt; persona.id === parseInt(id) ));                                                                  } 
+    else{
+        //Sino existe imprimimos el mensaje
+        response.status(410).json({error: &quot;Este id no existe&quot;});
+    }
+}]
+
+
+
+//Añadir una nueva persona a la lista
+const añadirPersona = [(request,response)=&gt;{ 
+/*Todo esto se ejecuta solo si los datos fueron validados. Es decir, validarDatos dentro de
+/validator/personas.js continuó con  next()*/
+
+
+    //Crea una variable tipo objeto, llamada nuevaPersona con los datos mandados en el body
+    const nuevaPersona = {
+        id: request.body.id,
+        Nombre: request.body.Nombre,
+        Apellido: request.body.Apellido,
+        Edad: request.body.Edad,
+        Mail: request.body.Mail,
+        Celular: request.body.Celular
+    }
+    //Verifico si el id mandado desde la url ya existe dentro de mi arreglo de personas
+    if(personas.some( persona =&gt; persona.id === parseInt(nuevaPersona.id) )){
+        //Si existe, mando el mensaje
+        response.status(411).json({error: &quot;Este id ya existe&quot;});
+    }
+    else{
+        //Sino existe,lo agrego con push al arreglo de personas y mando en la respuesta el obj añadido
+        personas.push(nuevaPersona);
+        response.json(nuevaPersona);       
+    }
+
+}]
+
+
+//Actualizar una nueva persona de la lista
+const actualizarPersona = [  
+
+    /*Todo esto se ejecuta solo si los datos fueron validados. Es decir, validarDatos dentro de
+/validator/personas.js continuó con  next() */
+
+    (request,response)=&gt;{
+
+    //Si no encontró ningún error en la validación entonces:
+    /*recupero el id de la persona haciendo un de-structur. La idea es crear una variable llamada id, 
+    que está contenida con el mismo nombre id dentro de parms*/
+    const {id} = request.params
+
+    //Verifico si el id mandado existe dentro de mi arreglo alguna persona dentro de mi array de personas
+    if(personas.some( persona =&gt; persona.id === parseInt(id) )){ 
+
+    /* Si la persona sí existe, entonces almaceno en una variable llamada nuevaPersona, de tipo object,
+    todos los valores que provienen del body  */
+    const nuevaPersona = {
+        id: request.body.id,
+        Nombre: request.body.Nombre,
+        Apellido: request.body.Apellido,
+        Edad: request.body.Edad,
+        Mail: request.body.Mail,
+        Celular: request.body.Celular
+    }    
+
+    //Asigno a personaAModificar todo el objeto que hace match con el id
+    personaAModificar= personas.find( persona =&gt; persona.id === parseInt(id))
+   // Modifico la persona con los nuevos datos
+    personaAModificar.id =nuevaPersona.id
+    personaAModificar.Nombre =nuevaPersona.Nombre
+    personaAModificar.Apellido =nuevaPersona.Apellido
+    personaAModificar.Edad =nuevaPersona.Edad
+    personaAModificar.Mail =nuevaPersona.Mail
+    personaAModificar.Celular =nuevaPersona.Celular
+
+    //Mando en la respuesta la persona con los datos modificados
+    response.json(personaAModificar)
+} 
+     else{
+         //Si el id no existe, mando el mensaje
+         response.status(410).json({error: &quot;Este id no existe&quot;});
+     }
+
+}]
+
+const eliminarPersona = [(request,response)=&gt;{
+    /*recupero el id de la persona haciendo un de-structur. La idea es crear una variable llamada id, 
+    que está contenida con el mismo nombre id dentro de parms*/
+    const {id} = request.params 
+
+    //Verifico si el id mandado existe dentro de mi arreglo alguna persona dentro de mi array de personas
+    if(personas.some( persona =&gt; persona.id === parseInt(id) )){
+//Si existe, entonces 'filtro' mi array personas y solo dejo las personas que tengan un id diferente al introducido
+      personas = personas.filter(persona =&gt; persona.id !== parseInt(id))      
+
+      //Mando en mi respuesta el id de la persona eliminada
+      response.json(id);
+ }
+     else {
+         //Sino el id no existe, mando el mensaje
+         response.status(410).json({error: &quot;Este id no existe&quot;});;
+     }
+
+
+}]
+
+//exporto las funciones hacia mi ruta /routers/personas.js
+module.exports = {obtenerPersonas, obtenerPersona,añadirPersona, actualizarPersona, eliminarPersona}
+
+
+</code></pre>
+<p><br><br>Estos archivos, trabajan en conjunto para generar los ENDPOINT y las validaciones correspondientes para cada solicitud. Noten que como ya lo habíamos comentado, la "base de datos" es un arreglo dentro del mismo proyecto, por lo que, al reiniciar el servidor, todos los cambios se perderán y el arreglo regresará a su contenido original. Posteriormente en la <a href="../implementacion/">parte 4</a> de este tutorial, lo vamos a vincular con una base de datos en la nube de Azure. <br><br></p>
+<p>4.-Dentro de la carpeta <strong>validators</strong>  agregar el siguiente código en el archivo <strong>personas.js</strong>. El código agregado viene con sus respectivos comentarios para mejor entendimiento del mismo.<br><br></p>
+<pre><code class="language-js">
+const { response } = require('express');
+const { request } = require('express');
+const res = require('express/lib/response');
+
+/*Creamos una 'variable' body  que son de express-validator, las cuales nos ayudarán a realizar las validaciones */
+const { body} = require('express-validator');
+
+/* importo la función validateResult desde  helpers/validateHelperes un helper para seguir el proceso
+o mandar un error*/
+const {validateResult}= require('../helpers/validateHelper') 
+
+const validarDatos = [
+     /*Con ayuda de las variables body  y validationResult creadas con 'express-validator',
+    validamos que los elementos que viene en el body existan, se llamen de la forma correcta y
+    sean del tipo correcto. NOTEN que es necesario que vengan todos los datos para realizar la modificación*/
+    body('id').exists().isNumeric(), // en la definción de nuestro RESTAPI no pedimos el id requerido, esto es porque en nuestra base de datos el id será auto incremental, pero como lo tenemos en un arreglo, nosotros debemos asignarle el id.Mas adelante cuando nos conectamos a la base de datos, este campo desaparecerá
+    body('Nombre').exists().isLength({ min: 3 }),
+    body('Apellido').exists().isLength({ min: 3 }),
+    body('Edad').exists().isNumeric(), 
+    body('Mail').exists().isEmail(), 
+    body('Celular').exists().isNumeric(), 
+
+    (request,response, next)=&gt;{    
+        /* Desacoplamos esta función para tener mejor control, entonces la mandamos a llamar y le pasamos los parámetros.
+         nos da un resultado si consigue todas las validaciones, si consigue un error  nos retorna el error  
+        sino continua el flujo con next(). Asi que simplemente la mandamos a llamar desde helpers/validateHelper */ 
+        validateResult(request,response, next)
+    }
+]
+
+module.exports = {validarDatos}//exportamos la constante para hacer uso en /routers/personajes.js como un  Middleware
+</code></pre>
+<p><br><br>
+5.- Dentro de la carpeta <strong>helpers</strong>  agregar el siguiente código en el archivo <strong>validateHelper.js</strong>. El código agregado viene con sus respectivos comentarios para mejor entendimiento del mismo.<br><br></p>
+<pre><code class="language-js">const { validationResult } = require('express-validator');
+
+//Construimos una función con los parámetros que nos pasan desde /validators/personas.js
+
+const validateResult = (request,response, next) =&gt;{
+
+    try{
+        //si no obtuvimos ninguna error continuamos con el flujo next()
+        validationResult(request).throw()
+        return next()
+    }catch(error){
+        // si obtuvimos algún error lo regresamos en la respuesta
+       response.status(400).json({ errors: error.array() });
+    }
+}
+
+module.exports={validateResult}
+
+</code></pre>
+<p><br><br>
+6.- Finalmente en nuestro archivo principal <strong>index.js</strong> vamos a agregar el siguiente código, en donde vinculamos todos los códigos anteriores. <br><br></p>
+<pre><code class="language-js">const express = require('express'); // Utilizo el módulo de express de Node
+const path = require('path'); // Utilizo el módulo path de Node
+const bodyParser = require('body-parser') // Utilizo el modulo de body parser
+const app = express(); // Genero mi aplicación de express simplemente llamando al constructor express()
+const endPoints = require('./app/routers/personas')/*Importo  el modulo(en este caso endPoint) que exporte
+ desde la ruta ./app/routers/personas */
+ const cors = require('cors')//Utilizo el módulo de cors
+
+
+app.use(cors());//le damos acceso a nuestro API desde cualquier 'origen'
+
+//Route &quot;Pagina principal&quot; al momento de conectarse al API, con un método GET que el navegador hace por default
+app.get('/', (req, res)=&gt;{
+    res.send(&quot;Bienvenido a mi API&quot;);
+})
+
+//Middleware
+//Body Parser (Para pasar a json los endpoint tipo post), se ejecuta antes de llegar al siguiente Middleware
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+
+ //Middleware  (registra una ruta) y ejecuta lo que viene dentro de endPoints
+app.use('/personas', endPoints)
+/*Si tuvieramos otra ruta en nuestra api como por ejemplo '/objetos', debemos crear las respectivas hojas
+de las carpetas controllers y routers con el mismo nombre 'objetos'*/
+
+
+/* constante para nuestro puerto, es un una condición OR para el caso de  desarrollo en algún servicio
+ o desarrollo local (nuestro caso) */
+const port = process.env.port || 8080; 
+app.listen(port, () =&gt;console.log(`Escuchando en el puerto ${port}`))
+
+</code></pre>
+<p><br><br>Y listo, finalmente tenemos nuestro REST-API construido con Node.js y Express con base a la definición dada en Swagger. Ahora lo siguiente sería realizar pruebas para cada endpoint, para esto nos ayudaremos de POSTMAN.</p>
+<h2 id="pruebas-de-funcionamiento-de-los-endpoint-utilizando-postman">Pruebas de funcionamiento de los ENDPOINT utilizando POSTMAN</h2>
+<p>Para realizar las pruebas de funcionamiento, lo primero que debemos hacer es tener corriendo nuestro proyecto, para esto como ya sabemos debemos escribir en la terminal el comando<br><br></p>
+<p><code>npm run serve</code>
+ <br><br>Una vez teniendo nuestro servidor listo, vamos a realizar las pruebas en el programa de POSTMAN, para esto te voy a dejar aquí el archivo, para que tú mismo puedas realizar las pruebas. Basta con descargar el archivo e importarlo en POSTMAN. ¡No olvides hacer las solicitudes con base a la definición de nuestra API! Te dejo <a href="https://app.swaggerhub.com/apis-docs/RobertoPeredo/personas-api/1.0.0">AQUÍ</a> la definición de nuestro REST-API para que tú mismo puedas realizar las pruebas.</p>
+<p><a href="https://github.com/RobertoPeredo/REST_API/tree/main/POSTMAN/localhost">ARCHIVO PARA PRUEBAS EN POSTMAN</a></p>
+<ol>
+<li>Prueba de la página principal del API<br><br>
+ <img alt="image" src="https://user-images.githubusercontent.com/99369122/171510656-1b04312f-82fb-45df-8628-e7d53a585746.png" /><br><br></li>
+<li>Prueba del método GET que nos devuelve todas las personas<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171510872-33c37db2-bf86-43b6-9371-d21550138abc.png" /><br><br></li>
+<li>Prueba del método GET que nos devuelve una persona por su ID<br><br>
+ <img alt="image" src="https://user-images.githubusercontent.com/99369122/171510960-4911bbc5-9723-48a5-a37d-14b9a5e0a407.png" /><br><br>
+ ERROR sino existe una persona con ese ID<br><br>
+ <img alt="image" src="https://user-images.githubusercontent.com/99369122/171511023-fef403f8-8191-4e60-8d25-3da9e3624859.png" /><br><br></li>
+<li>Prueba del método POST que agrega una persona a la lista<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511270-c9987861-c1eb-4a68-948a-57b71ece0783.png" /><br><br>
+Si queremos agregar un ID que ya existe<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511354-7aadb60b-4b73-4fd8-a4fe-534dd6705425.png" /><br><br>
+Si hace falta agregar en el body algún dato de la persona<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511448-0a61a581-1874-457e-bb97-f6c0ca63f3c2.png" /><br><br></li>
+<li>Prueba del método PUT que modifica los datos de una persona<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511565-66d5c9e4-540d-4f11-b650-76eae505f286.png" /><br><br>
+Si queremos modificar una id que no exista<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511656-873f88c4-ec9d-4d60-9f87-bdf5e3d4a4ff.png" /><br><br>
+Si queremos modificar, pero hace falta un dato en el body<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511748-621dbf1b-1348-43f2-853d-45900026bb3d.png" /><br><br></li>
+<li>Y Por último si queremos eliminar a una persona de la lista<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511824-7629afe5-0b62-42d8-80c0-d09ea3b1e158.png" /><br><br>
+Si queremos eliminar una persona, pero no existe el id<br><br>
+<img alt="image" src="https://user-images.githubusercontent.com/99369122/171511906-ee79b690-9d00-481a-9f18-e247aea04366.png" /><br><br></li>
+</ol>
+<p>Y listo, tenemos todas las validaciones realizadas y por consiguiente un REST API funcionando a la perfección.</p>
+<p>El enlace de repositorio completo, que incluye todo el código es el siguiente:
+--------&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; <a href="https://github.com/RobertoPeredo/PersonasAPILocal">LINK DEL REPOSITORIO</a></p>
+<p>Ahora, la siguiente parte del tutorial, consiste en montar este API en un App Service de Azure para poder acceder a éste desde cualquier lugar.</p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../implementacion/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../implementacion/" class="btn btn-xs btn-link">
+        4. Implementación de un API en un App Services de Azure
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../definicion/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../definicion/" class="btn btn-xs btn-link">
+        2. Definición del REST-API (Swagger)
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+</footer>
+
+</body>
+</html>
