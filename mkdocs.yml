@@ -1,0 +1,11 @@
+site_name: REST-API
+theme: windmill
+nav: 
+  - Inicio: index.md
+  - 1. Introducción:  introduccion.md
+  - 2. Definición del REST-API (Swagger): definicion.md
+  - 3. Desarrollo del REST-API con Node.js: desarrollo.md
+  - 4. Implementación de un API en un App Services de Azure: implementacion.md
+  - 5. Creación de una base de datos en Azure, modificación del API para trabar con DB y vinculación con el API: database.md
+  - 6. Asignación API-KEY: apiKey.md
+  - 7. Consumo del API (Front-end): consumo.md
