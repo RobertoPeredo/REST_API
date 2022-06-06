@@ -483,7 +483,7 @@ npm run serve
  <br><br>Una vez teniendo nuestro servidor listo, vamos a realizar las pruebas en el programa de POSTMAN, para esto te voy a dejar aquí el archivo, para que tú mismo puedas realizar las pruebas. Basta con descargar el archivo e importarlo en POSTMAN. ¡No olvides hacer las solicitudes con base a la definición de nuestra API! Te dejo [AQUÍ](https://app.swaggerhub.com/apis-docs/RobertoPeredo/personas-api/1.0.0) la definición de nuestro REST-API para que tú mismo puedas realizar las pruebas.
  
  
-  [ARCHIVO PARA PRUEBAS EN POSTMAN](https://github.com/RobertoPeredo/REST-API/tree/main/2.%20Desarrollo%20del%20API%20en%20Node.js%20(%20Con%20base%20de%20datos%20local)/POSTMAN)
+  [ARCHIVO PARA PRUEBAS EN POSTMAN](https://github.com/RobertoPeredo/REST_API/tree/main/POSTMAN/localhost)
  
  1. Prueba de la página principal del API<br><br>
  ![image](https://user-images.githubusercontent.com/99369122/171510656-1b04312f-82fb-45df-8628-e7d53a585746.png)<br><br>

@@ -512,7 +512,7 @@ module.exports = {obtenerPersonas, obtenerPersona,añadirPersona, actualizarPers
 ## Validación de los END-POINTS utilizando POSTMAN
    Lo siguiente es realizar nuestras pruebas, para verificar que todo esté funcionando correctamente.
    Para esto te voy a dejar nuevamente un archivo tipo JSON  para que podamos realizar las validaciones  en POSTMAN
-   [VALIDACIONES](https://github.com/RobertoPeredo/REST-API/tree/main/4.%20Creaci%C3%B3n%20de%20una%20base%20de%20datos%20en%20Azure%20y%20vinculaci%C3%B3n%20con%20el%20API/POSTMAN)
+   [VALIDACIONES](https://github.com/RobertoPeredo/REST_API/tree/main/POSTMAN/localhost-DB)
    
 
 

@@ -92,7 +92,7 @@ Se los comparto, para que ustedes mismos realicen pruebas del RESTA API funciona
 
 Probaremos nuestra API nuevamente con la plataforma de POSTMAN. Les dejó aquí el archivo para que tú mismo puedas realizar las pruebas. Basta con descargar el archivo e importarlo en POSTMAN. ¡No olvides hacer las solicitudes con base a la definición de nuestra API! Te dejo [AQUI](https://app.swaggerhub.com/apis-docs/RobertoPeredo/personas-api/1.0.0) la definición de nuestro REST API para que tú mismo o puedas realizar las pruebas.
 
-[ARCHIVO PARA PRUEBAS EN POSTMAN](https://github.com/RobertoPeredo/REST-API/tree/main/3.%20Implemetaci%C3%B3n%20del%20API%20en%20un%20App%20Service%20de%20Azure/POSTMAN)
+[ARCHIVO PARA PRUEBAS EN POSTMAN](https://github.com/RobertoPeredo/REST_API/tree/main/POSTMAN/AZURE)
 <br><br>En esta ocasión solo realizaremos la prueba de un END-POINT para que observen que todo trabaja a la perfección
 
 
